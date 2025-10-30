@@ -2,20 +2,20 @@
 {
     internal class User
     {
+        private int id;
         private string username;
-        private string password;
         private string role;
+
+        public int Id 
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
         public string Username
         {
             get { return username; }
-            set { username = value; }
-        }
-
-        public string Password
-        {
-            get { return password; }
-            set { password = value; }
+            set { username = Validator.ValidateUsername(value); }
         }
 
         public string Role
@@ -26,22 +26,22 @@
 
         public User()
         {
+            Id = 0;
             Username = string.Empty;
-            Password = string.Empty;
             Role = string.Empty;
         }
 
-        public User(string username, string password, string role)
+        public User(int id, string username, string role)
         {
+            Id = id;
             Username = username;
-            Password = password;
             Role = role;
         }
 
         public User(User other)
         {
+            Id = other.Id;
             Username = other.Username;
-            Password = other.Password;
             Role = other.Role;
         }
     }
