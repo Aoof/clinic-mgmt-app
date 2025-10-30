@@ -1,20 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36603.0 d17.14
+# SQL Server Management Studio Version 21
+VisualStudioVersion = 17.14.36603.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicMgmtApp_Project", "ClinicMgmtApp_Project\ClinicMgmtApp_Project.csproj", "{DC14B039-2985-445A-BCB5-2A081D2BC783}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Default|Any CPU = Default|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DC14B039-2985-445A-BCB5-2A081D2BC783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC14B039-2985-445A-BCB5-2A081D2BC783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC14B039-2985-445A-BCB5-2A081D2BC783}.Default|Any CPU.ActiveCfg = Release|Any CPU
 		{DC14B039-2985-445A-BCB5-2A081D2BC783}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC14B039-2985-445A-BCB5-2A081D2BC783}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E388D9ED-431E-4CDC-86D9-42AFBBD66DC0}.Debug|Any CPU.ActiveCfg = Default
+		{E388D9ED-431E-4CDC-86D9-42AFBBD66DC0}.Default|Any CPU.ActiveCfg = Default
+		{E388D9ED-431E-4CDC-86D9-42AFBBD66DC0}.Release|Any CPU.ActiveCfg = Default
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
