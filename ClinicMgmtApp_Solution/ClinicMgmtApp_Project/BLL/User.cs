@@ -1,10 +1,15 @@
-﻿namespace ClinicMgmtApp_Project.BLL
+﻿using ClinicMgmtApp_Project.DAL;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
+namespace ClinicMgmtApp_Project.BLL
 {
     internal class User
     {
         private int id;
         private string username;
-        private string role;
+        private RolesEnum role;
 
         public int Id 
         {
@@ -18,7 +23,7 @@
             set { username = Validator.ValidateUsername(value); }
         }
 
-        public string Role
+        public RolesEnum Role
         {
             get { return role; }
             set { role = value; }
@@ -28,10 +33,10 @@
         {
             Id = 0;
             Username = string.Empty;
-            Role = string.Empty;
+            Role = RolesEnum.Receptionist;
         }
 
-        public User(int id, string username, string role)
+        public User(int id, string username, RolesEnum role)
         {
             Id = id;
             Username = username;
@@ -43,6 +48,67 @@
             Id = other.Id;
             Username = other.Username;
             Role = other.Role;
+        }
+
+        public static string GenerateRandomPassword(int length = 12)
+        {
+            const string validChars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*()-_=+";
+            Random random = new Random();
+            char[] passwordChars = new char[length];
+            for (int i = 0; i < length; i++)
+            {
+                passwordChars[i] = validChars[random.Next(validChars.Length)];
+            }
+
+            string password = new string(passwordChars);
+
+            try
+            {
+                Validator.ValidatePassword(password);
+            }
+            catch (ValidationException)
+            {
+                return GenerateRandomPassword(length);
+            }
+
+            return new string(passwordChars);
+        }
+
+        public static string RoleToString(RolesEnum role)
+        {
+            return role.ToString();
+        }
+
+        public static RolesEnum StringToRole(string roleString)
+        {
+            if (Enum.TryParse(roleString, out RolesEnum role))
+            {
+                return role;
+            }
+            else
+            {
+                throw new ValidationException("Invalid role string: " + roleString);
+            }
+        }
+
+        public static List<User> GetAllUsers()
+        {
+            return UserDB.GetAllUsers();
+        }
+
+        public static void CreateUser(User newUser, string plainPassword)
+        {
+            UserDB.CreateUser(newUser, plainPassword);
+        }
+
+        public static void UpdateUser(User updatedUser, string plainPassword = null)
+        {
+            UserDB.UpdateUser(updatedUser, plainPassword);
+        }
+
+        public static void DeleteUser(int id)
+        {
+            UserDB.DeleteUser(id);
         }
     }
 }

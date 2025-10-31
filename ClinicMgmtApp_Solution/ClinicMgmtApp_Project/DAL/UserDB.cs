@@ -51,7 +51,7 @@ namespace ClinicMgmtApp_Project.DAL
         }
         public static List<User> GetAllUsers()
         {
-            if (UserStore.GetUser().Role != "Admin")
+            if (UserStore.GetUser().Role != RolesEnum.Administrator)
             {
                 throw new UnauthorizedException("Access denied: Only Admin users can retrieve all users.");
             }
@@ -68,13 +68,11 @@ namespace ClinicMgmtApp_Project.DAL
 
                 while (sqlDataReader.Read())
                 {
-                    User user = new User
-                    {
-                        Id = Convert.ToInt32(sqlDataReader["Id"]),
-                        Username = sqlDataReader["Username"].ToString(),
-                        Role = sqlDataReader["Role"].ToString()
-                    };
-
+                    User user = new User(
+                        Convert.ToInt32(sqlDataReader["Id"]),
+                        sqlDataReader["Username"].ToString(),
+                        User.StringToRole(sqlDataReader["Role"].ToString())
+                    );
                     users.Add(user);
                 }
             }
@@ -104,7 +102,7 @@ namespace ClinicMgmtApp_Project.DAL
                         authenticatedUser = new User(
                             Convert.ToInt32(sqlDataReader["Id"]), 
                             sqlDataReader["Username"].ToString(), 
-                            sqlDataReader["Role"].ToString()
+                            User.StringToRole(sqlDataReader["Role"].ToString())
                         );
                     } else
                     {
@@ -126,9 +124,9 @@ namespace ClinicMgmtApp_Project.DAL
         public static void CreateUser(User entity, string plainPassword)
         {
             // Temporarily comment out to allow initial user creation
-            if (UserStore.GetUser().Role != "Adminstrator")
+            if (UserStore.GetUser().Role != RolesEnum.Administrator)
             {
-                throw new UnauthorizedAccessException("Access denied: Only Adminstrator users can create new users.");
+                throw new UnauthorizedAccessException("Access denied: Only Administrator users can create new users.");
             }
             try
             {
@@ -136,7 +134,7 @@ namespace ClinicMgmtApp_Project.DAL
                 sqlCommand = new SqlCommand("INSERT INTO [dbo].[User] (Username, PasswordHash, Role) VALUES (@Username, @PasswordHash, @Role)", sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@Username", entity.Username);
                 sqlCommand.Parameters.AddWithValue("@PasswordHash", GenerateSaltedHash(Validator.ValidatePassword(plainPassword)));
-                sqlCommand.Parameters.AddWithValue("@Role", entity.Role);
+                sqlCommand.Parameters.AddWithValue("@Role", User.RoleToString(entity.Role));
                 sqlCommand.ExecuteNonQuery();
             }
             finally
@@ -145,17 +143,17 @@ namespace ClinicMgmtApp_Project.DAL
             }
         }
 
-        public static void DeleteUser(string username)
+        public static void DeleteUser(int id)
         {
-            if (UserStore.GetUser().Role != "Adminstrator")
+            if (UserStore.GetUser().Role != RolesEnum.Administrator)
             {
                 throw new UnauthorizedException("Access denied: Only Admin users can delete users.");
             }
             try
             {
                 sqlConnection = DatabaseConnection.GetConnection();
-                sqlCommand = new SqlCommand("DELETE FROM [dbo].[User] WHERE Username = @Username", sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@Username", username);
+                sqlCommand = new SqlCommand("DELETE FROM [dbo].[User] WHERE Id = @Id", sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@Id", id);
                 int rowsAffected = sqlCommand.ExecuteNonQuery();
                 if (rowsAffected == 0)
                 {
@@ -170,7 +168,7 @@ namespace ClinicMgmtApp_Project.DAL
 
         public static void UpdateUser(User entity, string newPassword = null)
         {
-            if (UserStore.GetUser().Role != "Adminstrator")
+            if (UserStore.GetUser().Role != RolesEnum.Administrator)
             {
                 throw new UnauthorizedException("Access denied: Only Admin users can update users.");
             }
@@ -186,10 +184,10 @@ namespace ClinicMgmtApp_Project.DAL
                 }
                 else
                 {
-                    sqlCommand = new SqlCommand("UPDATE User SET Username = @Username, Role = @Role WHERE Id = @Id", sqlConnection);
+                    sqlCommand = new SqlCommand("UPDATE [dbo].[User] SET Username = @Username, Role = @Role WHERE Id = @Id", sqlConnection);
                 }
                 sqlCommand.Parameters.AddWithValue("@Username", entity.Username);
-                sqlCommand.Parameters.AddWithValue("@Role", entity.Role);
+                sqlCommand.Parameters.AddWithValue("@Role", User.RoleToString(entity.Role));
                 sqlCommand.Parameters.AddWithValue("@Id", entity.Id);
 
                 int rowsAffected = sqlCommand.ExecuteNonQuery();

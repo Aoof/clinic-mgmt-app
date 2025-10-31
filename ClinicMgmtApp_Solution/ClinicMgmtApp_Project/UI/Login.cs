@@ -14,31 +14,53 @@ namespace ClinicMgmtApp_Project.UI
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            txtUsername.Text = Properties.Settings.Default.Username;
+            txtPassword.Text = Properties.Settings.Default.Password;
+
+            if (!string.IsNullOrEmpty(txtUsername.Text) && !string.IsNullOrEmpty(txtPassword.Text))
+            {
+                checkRememberPassword.Checked = true;
+            }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text;
+
             try
             {
                 UserStore.Login(username, password);
                 Form dashboard = null;
                 switch (UserStore.GetUser().Role)
                 {
-                    case "Adminstrator":
+                    case RolesEnum.Administrator:
                         dashboard = new AdminDashboard();
                         break;
-                    case "Doctor":
+                    case RolesEnum.Doctor:
                         dashboard = new DoctorDashboard();
                         break;
-                    case "Receptionist":
+                    case RolesEnum.Receptionist:
                         dashboard = new ReceptionistDashboard();
                         break;
                     default:
                         MessageBox.Show("Login successful! Welcome, User.");
                         break;
                 }
+
+                if (checkRememberPassword.Checked)
+                {
+                    Properties.Settings.Default.Username = username;
+                    Properties.Settings.Default.Password = password;
+                    Properties.Settings.Default.Save();
+                }
+                else
+                {
+                    Properties.Settings.Default.Username = "";
+                    Properties.Settings.Default.Password = "";
+                    Properties.Settings.Default.Save();
+                }
+
                 this.Hide();
                 dashboard.ShowDialog();
                 Close();
@@ -51,7 +73,6 @@ namespace ClinicMgmtApp_Project.UI
                     return;
                 }
                 MessageBox.Show("Unexpected error happened! Contact adminstration for more info.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw ex;
             }
         }
 

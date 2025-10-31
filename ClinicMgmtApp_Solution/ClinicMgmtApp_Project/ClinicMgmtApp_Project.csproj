@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BusinessLogicExceptions.cs" />
+    <Compile Include="BLL\RolesEnum.cs" />
     <Compile Include="BLL\User.cs" />
     <Compile Include="BLL\UserStore.cs" />
     <Compile Include="BLL\Validator.cs" />
@@ -101,6 +102,9 @@
     </Compile>
     <EmbeddedResource Include="UI\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\DoctorDashboard.resx">
+      <DependentUpon>DoctorDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

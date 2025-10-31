@@ -32,7 +32,7 @@ namespace ClinicMgmtApp_Project.BLL
 
         public static void Register(User newUser, string plainPassword)
         {
-            if (CurrentUser == null || CurrentUser.Role != "Admin")
+            if (CurrentUser == null || CurrentUser.Role != RolesEnum.Administrator)
             {
                 throw new UnauthorizedException("Access denied: Only Admin users can register new users.");
             }

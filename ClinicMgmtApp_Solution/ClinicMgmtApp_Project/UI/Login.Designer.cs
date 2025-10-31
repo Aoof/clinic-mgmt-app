@@ -36,6 +36,7 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblHeader = new System.Windows.Forms.Label();
+            this.checkRememberPassword = new System.Windows.Forms.CheckBox();
             this.grpForm.SuspendLayout();
             this.pnlButtons.SuspendLayout();
             this.SuspendLayout();
@@ -44,6 +45,7 @@
             // 
             this.grpForm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpForm.Controls.Add(this.checkRememberPassword);
             this.grpForm.Controls.Add(this.pnlButtons);
             this.grpForm.Controls.Add(this.txtPassword);
             this.grpForm.Controls.Add(this.lblPassword);
@@ -53,24 +55,25 @@
             this.grpForm.Location = new System.Drawing.Point(12, 167);
             this.grpForm.Name = "grpForm";
             this.grpForm.Padding = new System.Windows.Forms.Padding(30);
-            this.grpForm.Size = new System.Drawing.Size(965, 384);
+            this.grpForm.Size = new System.Drawing.Size(711, 384);
             this.grpForm.TabIndex = 0;
             this.grpForm.TabStop = false;
             this.grpForm.Text = "Form";
             // 
             // pnlButtons
             // 
+            this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlButtons.ColumnCount = 1;
             this.pnlButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.pnlButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.pnlButtons.Controls.Add(this.btnLogin, 0, 0);
-            this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(30, 290);
+            this.pnlButtons.Location = new System.Drawing.Point(39, 290);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.RowCount = 1;
             this.pnlButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.pnlButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.pnlButtons.Size = new System.Drawing.Size(905, 64);
+            this.pnlButtons.Size = new System.Drawing.Size(639, 64);
             this.pnlButtons.TabIndex = 5;
             // 
             // btnLogin
@@ -81,9 +84,9 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Lucida Sans", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(345, 3);
+            this.btnLogin.Location = new System.Drawing.Point(265, 3);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(214, 58);
+            this.btnLogin.Size = new System.Drawing.Size(108, 58);
             this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
@@ -97,7 +100,7 @@
             this.txtPassword.Location = new System.Drawing.Point(39, 197);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(9, 3, 3, 9);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(893, 39);
+            this.txtPassword.Size = new System.Drawing.Size(639, 39);
             this.txtPassword.TabIndex = 3;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyDown);
@@ -120,7 +123,7 @@
             this.txtUsername.Location = new System.Drawing.Point(39, 86);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(9, 3, 3, 9);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(893, 39);
+            this.txtUsername.Size = new System.Drawing.Size(639, 39);
             this.txtUsername.TabIndex = 1;
             this.txtUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUsername_KeyDown);
             // 
@@ -131,7 +134,7 @@
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(542, 45);
             this.lblUsername.TabIndex = 0;
-            this.lblUsername.Text = "Username:";
+            this.lblUsername.Text = "Username";
             this.lblUsername.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblHeader
@@ -141,17 +144,27 @@
             this.lblHeader.Font = new System.Drawing.Font("Lucida Sans", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHeader.Location = new System.Drawing.Point(0, 0);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(989, 196);
+            this.lblHeader.Size = new System.Drawing.Size(735, 196);
             this.lblHeader.TabIndex = 1;
             this.lblHeader.Text = "Clinic Management Login";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // checkRememberPassword
+            // 
+            this.checkRememberPassword.AutoSize = true;
+            this.checkRememberPassword.Location = new System.Drawing.Point(39, 248);
+            this.checkRememberPassword.Name = "checkRememberPassword";
+            this.checkRememberPassword.Size = new System.Drawing.Size(218, 25);
+            this.checkRememberPassword.TabIndex = 6;
+            this.checkRememberPassword.Text = "Remember Password";
+            this.checkRememberPassword.UseVisualStyleBackColor = true;
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(989, 563);
+            this.ClientSize = new System.Drawing.Size(735, 563);
             this.Controls.Add(this.grpForm);
             this.Controls.Add(this.lblHeader);
             this.Font = new System.Drawing.Font("Lucida Sans", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -179,6 +192,7 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.TableLayoutPanel pnlButtons;
         private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.CheckBox checkRememberPassword;
     }
 }
 
