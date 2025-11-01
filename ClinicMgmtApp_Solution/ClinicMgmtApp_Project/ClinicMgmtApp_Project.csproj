@@ -57,11 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\BusinessLogicExceptions.cs" />
-    <Compile Include="BLL\RolesEnum.cs" />
+    <Compile Include="BLL\Utils\BusinessLogicExceptions.cs" />
+    <Compile Include="BLL\Utils\RolesEnum.cs" />
     <Compile Include="BLL\User.cs" />
     <Compile Include="BLL\UserStore.cs" />
-    <Compile Include="BLL\Validator.cs" />
+    <Compile Include="BLL\Utils\Validator.cs" />
     <Compile Include="DAL\DatabaseConnection.cs" />
     <Compile Include="DAL\DataExceptions.cs" />
     <Compile Include="DAL\UserDB.cs" />
