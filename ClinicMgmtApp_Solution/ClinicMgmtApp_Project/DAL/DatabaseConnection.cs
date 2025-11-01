@@ -14,17 +14,24 @@ namespace ClinicMgmtApp_Project.DAL
 
         public static SqlConnection GetConnection()
         {
-            if (sqlConnection == null)
+            try
             {
-                sqlConnection = new SqlConnection(sqlConnectionString);
-            }
+                if (sqlConnection == null)
+                {
+                    sqlConnection = new SqlConnection(sqlConnectionString);
+                }
 
-            if (sqlConnection.State != ConnectionState.Open)
+                if (sqlConnection.State != ConnectionState.Open)
+                {
+                    sqlConnection.Open();
+                }
+
+                return sqlConnection;
+            }
+            catch (SqlException ex)
             {
-                sqlConnection.Open();
+                throw new DatabaseConnectionException("Failed to connect to the database: " + ex.Message);
             }
-
-            return sqlConnection;
         }
 
         public static void CloseConnection()

@@ -1,6 +1,7 @@
 ﻿using ClinicMgmtApp_Project.BLL;
 using ClinicMgmtApp_Project.DAL;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ClinicMgmtApp_Project.UI
@@ -12,7 +13,18 @@ namespace ClinicMgmtApp_Project.UI
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private Image ResizeImage(Image img, int width, int height)
+        {
+            Bitmap resized = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(resized))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(img, 0, 0, width, height);
+            }
+            return resized;
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
         {
             txtUsername.Text = Properties.Settings.Default.Username;
             txtPassword.Text = Properties.Settings.Default.Password;

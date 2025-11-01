@@ -1,7 +1,6 @@
 ﻿using ClinicMgmtApp_Project.DAL;
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 namespace ClinicMgmtApp_Project.BLL
 {
@@ -93,22 +92,44 @@ namespace ClinicMgmtApp_Project.BLL
 
         public static List<User> GetAllUsers()
         {
+            if (!UserStore.GetUser().CanPerformAction(minimumRole: RolesEnum.Receptionist))
+            {
+                throw new UnauthorizedException("Access denied: You must be at least a receptionist to retrieve all users.");
+            }
             return UserDB.GetAllUsers();
         }
 
         public static void CreateUser(User newUser, string plainPassword)
         {
-            UserDB.CreateUser(newUser, plainPassword);
+            if (!UserStore.GetUser().CanPerformAction(minimumRole: RolesEnum.Administrator))
+            {
+                throw new UnauthorizedException("Access denied: Only Admin users can register new users.");
+            }
+            UserDB.CreateUser(newUser, Validator.ValidatePassword(plainPassword));
         }
 
         public static void UpdateUser(User updatedUser, string plainPassword = null)
         {
-            UserDB.UpdateUser(updatedUser, plainPassword);
+            if (!UserStore.GetUser().CanPerformAction(minimumRole: RolesEnum.Administrator))
+            {
+                throw new UnauthorizedException("Access denied: Only Admin users can update other users.");
+            }
+
+            UserDB.UpdateUser(updatedUser, Validator.ValidatePassword(plainPassword));
         }
 
         public static void DeleteUser(int id)
         {
+            if (!UserStore.GetUser().CanPerformAction(minimumRole: RolesEnum.Administrator))
+            {
+                throw new UnauthorizedException("Access denied: Only Admin users can delete other users.");
+            }
             UserDB.DeleteUser(id);
         }
+
+        public bool CanPerformAction(RolesEnum minimumRole)
+        {
+            return Role <= minimumRole;
+        } 
     }
 }

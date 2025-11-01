@@ -173,7 +173,7 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clinic Management";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.grpForm.ResumeLayout(false);
             this.grpForm.PerformLayout();
             this.pnlButtons.ResumeLayout(false);

@@ -10,9 +10,102 @@ namespace ClinicMgmtApp_Project.UI
         private static bool isEditMode = false;
         private static bool isPasswordChanged = false;
 
+        private readonly Color SIDEBAR_BG = Color.FromArgb(44, 62, 80);
+        private readonly Color SIDEBAR_ACTIVE = Color.FromArgb(52, 73, 94);
+        private readonly Color HEADER_BG = Color.FromArgb(41, 128, 185);
+        private Image ResizeImage(Image img, int width, int height)
+        {
+            Bitmap resized = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(resized))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(img, 0, 0, width, height);
+            }
+            return resized;
+        }
+
         public AdminDashboard()
         {
             InitializeComponent();
+
+            // Adjust button image sizes
+            btnDoctorScheduling.Image = ResizeImage(btnDoctorScheduling.Image, 30, 30);
+            btnDoctorScheduling.ImageAlign = ContentAlignment.MiddleLeft;
+            btnDoctorScheduling.TextAlign = ContentAlignment.MiddleLeft;
+            btnDoctorScheduling.TextImageRelation = TextImageRelation.ImageBeforeText;
+
+            btnPatientRegistration.Image = ResizeImage(btnPatientRegistration.Image, 30, 30);
+            btnPatientRegistration.ImageAlign = ContentAlignment.MiddleLeft;
+            btnPatientRegistration.TextAlign = ContentAlignment.MiddleLeft;
+            btnPatientRegistration.TextImageRelation = TextImageRelation.ImageBeforeText;
+
+            btnUserManagement.Image = ResizeImage(btnUserManagement.Image, 30, 30);
+            btnUserManagement.ImageAlign = ContentAlignment.MiddleLeft;
+            btnUserManagement.TextAlign = ContentAlignment.MiddleLeft;
+            btnUserManagement.TextImageRelation = TextImageRelation.ImageBeforeText;
+
+            btnReports.Image = ResizeImage(btnReports.Image, 30, 30);
+            btnReports.ImageAlign = ContentAlignment.MiddleLeft;
+            btnReports.TextAlign = ContentAlignment.MiddleLeft;
+            btnReports.TextImageRelation = TextImageRelation.ImageBeforeText;
+
+            ShowPanel(pnlUserManagement);
+            SetActiveButton(btnUserManagement);
+        }
+
+        private void AdminDashboard_Load(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
+        // Navigation Methods
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlReports);
+            SetActiveButton(btnReports);
+        }
+
+        private void btnUserManagement_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlUserManagement);
+            SetActiveButton(btnUserManagement);
+        }
+
+        private void btnDoctorScheduling_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlDoctorScheduling);
+            SetActiveButton(btnDoctorScheduling);
+        }
+
+        private void btnPatientRegistration_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlPatientRegistration);
+            SetActiveButton(btnPatientRegistration);
+        }
+
+        // Helper method to show selected panel and hide others
+        private void ShowPanel(Panel panelToShow)
+        {
+            pnlReports.Visible = false;
+            pnlUserManagement.Visible = false;
+            pnlDoctorScheduling.Visible = false;
+            pnlPatientRegistration.Visible = false;
+
+            panelToShow.Visible = true;
+            panelToShow.BringToFront();
+        }
+
+        // Helper method to highlight active button
+        private void SetActiveButton(Button activeButton)
+        {
+            // Reset all buttons to default color
+            btnReports.BackColor = SIDEBAR_BG;
+            btnUserManagement.BackColor = SIDEBAR_BG;
+            btnDoctorScheduling.BackColor = SIDEBAR_BG;
+            btnPatientRegistration.BackColor = SIDEBAR_BG;
+
+            // Highlight the active button
+            activeButton.BackColor = SIDEBAR_ACTIVE;
         }
 
         private void ResetForm()
@@ -38,6 +131,7 @@ namespace ClinicMgmtApp_Project.UI
             grpAdminForm.Text = "Create User";
             txtPassword.UseSystemPasswordChar = true;
             btnTogglePassword.Text = "Show";
+            txtPassword.BackColor = SystemColors.Window;
         }
 
         private void EnterEditMode()
@@ -46,14 +140,10 @@ namespace ClinicMgmtApp_Project.UI
             btnCancel.Visible = true;
             btnDelete.Visible = true;
             txtPassword.Text = string.Empty;
+            txtPassword.BackColor = SystemColors.ControlDark;
             isPasswordChanged = false;
             btnSubmit.Text = "Update";
             grpAdminForm.Text = "Edit User";
-        }
-
-        private void AdminDashboard_Load(object sender, EventArgs e)
-        {
-            ResetForm();
         }
 
         private void txtPassword_TextChanged(object sender, EventArgs e)
@@ -132,8 +222,9 @@ namespace ClinicMgmtApp_Project.UI
         {
             try
             {
+                string username = dgvUsers.CurrentRow.Cells["Username"].Value.ToString();
                 int userId = Convert.ToInt32(dgvUsers.CurrentRow.Cells["Id"].Value);
-                var confirmResult = MessageBox.Show("Are you sure to delete this user?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                var confirmResult = MessageBox.Show("You're about to delete `" + username + "` Are you sure to delete this user?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (confirmResult == DialogResult.Yes)
                 {
                     User.DeleteUser(userId);

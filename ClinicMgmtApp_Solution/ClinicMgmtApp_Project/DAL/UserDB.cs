@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
-using System.Windows.Forms;
 using ClinicMgmtApp_Project.BLL;
 
 namespace ClinicMgmtApp_Project.DAL
@@ -49,13 +48,8 @@ namespace ClinicMgmtApp_Project.DAL
             // ^ Copying the next 20 bytes (the hash) to the byte array
             return Convert.ToBase64String(hashBytes); // < Turning the byte array into a Base64 string to store in the database
         }
-        public static List<User> GetAllUsers()
+        internal static List<User> GetAllUsers()
         {
-            if (UserStore.GetUser().Role != RolesEnum.Administrator)
-            {
-                throw new UnauthorizedException("Access denied: Only Admin users can retrieve all users.");
-            }
-
             List<User> users = new List<User>();
             
             try
@@ -84,7 +78,7 @@ namespace ClinicMgmtApp_Project.DAL
             return users;
         }
 
-        public static User AuthenticateUser(string username, string plainPassword)
+        internal static User AuthenticateUser(string username, string plainPassword)
         {
             // Chose to use pbkdf2 for password hashing + salting for better security (More info is in VerifyPassword and GenerateSaltedHash methods)
             User authenticatedUser = null;
@@ -121,21 +115,20 @@ namespace ClinicMgmtApp_Project.DAL
             return authenticatedUser;
         }
 
-        public static void CreateUser(User entity, string plainPassword)
+        internal static void CreateUser(User entity, string plainPassword)
         {
-            // Temporarily comment out to allow initial user creation
-            if (UserStore.GetUser().Role != RolesEnum.Administrator)
-            {
-                throw new UnauthorizedAccessException("Access denied: Only Administrator users can create new users.");
-            }
             try
             {
                 sqlConnection = DatabaseConnection.GetConnection();
                 sqlCommand = new SqlCommand("INSERT INTO [dbo].[User] (Username, PasswordHash, Role) VALUES (@Username, @PasswordHash, @Role)", sqlConnection);
                 sqlCommand.Parameters.AddWithValue("@Username", entity.Username);
-                sqlCommand.Parameters.AddWithValue("@PasswordHash", GenerateSaltedHash(Validator.ValidatePassword(plainPassword)));
+                sqlCommand.Parameters.AddWithValue("@PasswordHash", GenerateSaltedHash(plainPassword));
                 sqlCommand.Parameters.AddWithValue("@Role", User.RoleToString(entity.Role));
                 sqlCommand.ExecuteNonQuery();
+            }
+            catch (SqlException ex) when (ex.Number == 2627)
+            {
+                throw new UniqueConstraintViolationException("Creation failed: Username already exists.");
             }
             finally
             {
@@ -143,12 +136,8 @@ namespace ClinicMgmtApp_Project.DAL
             }
         }
 
-        public static void DeleteUser(int id)
+        internal static void DeleteUser(int id)
         {
-            if (UserStore.GetUser().Role != RolesEnum.Administrator)
-            {
-                throw new UnauthorizedException("Access denied: Only Admin users can delete users.");
-            }
             try
             {
                 sqlConnection = DatabaseConnection.GetConnection();
@@ -166,13 +155,8 @@ namespace ClinicMgmtApp_Project.DAL
             }
         }
 
-        public static void UpdateUser(User entity, string newPassword = null)
+        internal static void UpdateUser(User entity, string newPassword = null)
         {
-            if (UserStore.GetUser().Role != RolesEnum.Administrator)
-            {
-                throw new UnauthorizedException("Access denied: Only Admin users can update users.");
-            }
-
             try
             {
                 sqlConnection = DatabaseConnection.GetConnection();
@@ -180,7 +164,7 @@ namespace ClinicMgmtApp_Project.DAL
                 if (newPassword != null)
                 {
                     sqlCommand = new SqlCommand("UPDATE [dbo].[User] SET Username = @Username, PasswordHash = @PasswordHash, Role = @Role WHERE Id = @Id", sqlConnection);
-                    sqlCommand.Parameters.AddWithValue("@PasswordHash", GenerateSaltedHash(Validator.ValidatePassword(newPassword)));
+                    sqlCommand.Parameters.AddWithValue("@PasswordHash", GenerateSaltedHash(newPassword));
                 }
                 else
                 {
@@ -195,6 +179,10 @@ namespace ClinicMgmtApp_Project.DAL
                 {
                     throw new UserNotFoundException("Update failed: User not found.");
                 }
+            }
+            catch (SqlException ex) when (ex.Number == 2627)
+            {
+                throw new UniqueConstraintViolationException("Update failed: Username already exists.");
             }
             finally
             {

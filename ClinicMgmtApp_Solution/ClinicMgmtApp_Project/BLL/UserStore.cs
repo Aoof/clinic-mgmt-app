@@ -29,14 +29,5 @@ namespace ClinicMgmtApp_Project.BLL
         {
             CurrentUser = null;
         }
-
-        public static void Register(User newUser, string plainPassword)
-        {
-            if (CurrentUser == null || CurrentUser.Role != RolesEnum.Administrator)
-            {
-                throw new UnauthorizedException("Access denied: Only Admin users can register new users.");
-            }
-            UserDB.CreateUser(newUser, plainPassword);
-        }
     }
 }
