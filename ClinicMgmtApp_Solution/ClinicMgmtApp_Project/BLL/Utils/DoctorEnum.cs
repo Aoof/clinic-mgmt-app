@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ClinicMgmtApp_Project.BLL.Utils
+{
+    public enum DoctorEnum
+    {
+
+        Undefined,
+
+
+        Dermatologist,
+
+
+        Cardiologist,
+
+
+        Psychiatrist
+    }
+}

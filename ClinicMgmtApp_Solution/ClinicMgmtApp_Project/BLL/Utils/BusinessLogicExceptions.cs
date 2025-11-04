@@ -19,4 +19,10 @@ namespace ClinicMgmtApp_Project.BLL
         public ValidationException(string message) : base(message) { }
         public ValidationException(string message, Exception inner) : base(message, inner) { }
     }
+    public class UnauthorizedException : Exception
+    {
+        public UnauthorizedException() : base("Unauthorized access.") { }
+        public UnauthorizedException(string message) : base(message) { }
+        public UnauthorizedException(string message, Exception inner) : base(message, inner) { }
+    }
 }

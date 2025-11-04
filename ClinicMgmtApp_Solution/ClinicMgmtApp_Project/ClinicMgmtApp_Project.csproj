@@ -57,19 +57,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\Doctor.cs" />
     <Compile Include="BLL\Utils\BusinessLogicExceptions.cs" />
+    <Compile Include="BLL\Utils\DoctorEnum.cs" />
     <Compile Include="BLL\Utils\RolesEnum.cs" />
     <Compile Include="BLL\User.cs" />
     <Compile Include="BLL\UserStore.cs" />
     <Compile Include="BLL\Utils\Validator.cs" />
     <Compile Include="DAL\DatabaseConnection.cs" />
     <Compile Include="DAL\DataExceptions.cs" />
+    <Compile Include="DAL\DoctorDB.cs" />
     <Compile Include="DAL\UserDB.cs" />
-    <Compile Include="UI\AdminDashboard.cs">
+    <Compile Include="UI\AdminDashboard\AdminDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\AdminDashboard.Designer.cs">
+    <Compile Include="UI\AdminDashboard\AdminDashboard.Designer.cs">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AdminDashboard\AdminDashboard.Doctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AdminDashboard\AdminDashboard.User.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\DoctorDashboard.cs">
       <SubType>Form</SubType>
@@ -101,7 +110,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UI\AdminDashboard.resx">
+    <EmbeddedResource Include="UI\AdminDashboard\AdminDashboard.resx">
       <DependentUpon>AdminDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DoctorDashboard.resx">
