@@ -31,6 +31,7 @@ namespace ClinicMgmtApp_Project.UI
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminDashboard));
             this.lblHeader = new System.Windows.Forms.Label();
             this.pnlSidebar = new System.Windows.Forms.Panel();
             this.btnPatientRegistration = new System.Windows.Forms.Button();
@@ -1403,6 +1404,7 @@ namespace ClinicMgmtApp_Project.UI
             this.Controls.Add(this.pnlSidebar);
             this.Controls.Add(this.lblHeader);
             this.Font = new System.Drawing.Font("Lucida Sans", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(1700, 800);
             this.Name = "AdminDashboard";

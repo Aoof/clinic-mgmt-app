@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.grpForm = new System.Windows.Forms.GroupBox();
+            this.checkRememberPassword = new System.Windows.Forms.CheckBox();
             this.pnlButtons = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
@@ -36,7 +38,6 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblHeader = new System.Windows.Forms.Label();
-            this.checkRememberPassword = new System.Windows.Forms.CheckBox();
             this.grpForm.SuspendLayout();
             this.pnlButtons.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +60,16 @@
             this.grpForm.TabIndex = 0;
             this.grpForm.TabStop = false;
             this.grpForm.Text = "Form";
+            // 
+            // checkRememberPassword
+            // 
+            this.checkRememberPassword.AutoSize = true;
+            this.checkRememberPassword.Location = new System.Drawing.Point(39, 248);
+            this.checkRememberPassword.Name = "checkRememberPassword";
+            this.checkRememberPassword.Size = new System.Drawing.Size(218, 25);
+            this.checkRememberPassword.TabIndex = 6;
+            this.checkRememberPassword.Text = "Remember Password";
+            this.checkRememberPassword.UseVisualStyleBackColor = true;
             // 
             // pnlButtons
             // 
@@ -149,16 +160,6 @@
             this.lblHeader.Text = "Clinic Management Login";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // checkRememberPassword
-            // 
-            this.checkRememberPassword.AutoSize = true;
-            this.checkRememberPassword.Location = new System.Drawing.Point(39, 248);
-            this.checkRememberPassword.Name = "checkRememberPassword";
-            this.checkRememberPassword.Size = new System.Drawing.Size(218, 25);
-            this.checkRememberPassword.TabIndex = 6;
-            this.checkRememberPassword.Text = "Remember Password";
-            this.checkRememberPassword.UseVisualStyleBackColor = true;
-            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -169,6 +170,7 @@
             this.Controls.Add(this.lblHeader);
             this.Font = new System.Drawing.Font("Lucida Sans", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
