@@ -38,9 +38,12 @@ namespace ClinicMgmtApp_Project.UI
 
             // Adjust button image sizes
             AdjustButtonStyles(btnDoctorManagement);
+            AdjustButtonStyles(btnDoctorScheduling);
             AdjustButtonStyles(btnPatientRegistration);
             AdjustButtonStyles(btnReports);
             AdjustButtonStyles(btnUserManagement);
+
+            SetupSchedulingListViews();
 
             ShowPanel(pnlUserManagement);
             SetActiveButton(btnUserManagement);
@@ -65,10 +68,17 @@ namespace ClinicMgmtApp_Project.UI
             SetActiveButton(btnUserManagement);
         }
 
-        private void btnDoctorScheduling_Click(object sender, EventArgs e)
+        private void btnDoctorManagement_Click(object sender, EventArgs e)
         {
             ShowPanel(pnlDoctorManagement);
             SetActiveButton(btnDoctorManagement);
+        }
+
+        private void btnDoctorScheduling_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnlDoctorScheduling);
+            SetupSchedulingListViews();
+            SetActiveButton(btnDoctorScheduling);
         }
 
         private void btnPatientRegistration_Click(object sender, EventArgs e)
@@ -83,6 +93,7 @@ namespace ClinicMgmtApp_Project.UI
             pnlReports.Visible = false;
             pnlUserManagement.Visible = false;
             pnlDoctorManagement.Visible = false;
+            pnlDoctorScheduling.Visible = false;
             pnlPatientRegistration.Visible = false;
 
             panelToShow.Visible = true;
@@ -96,11 +107,19 @@ namespace ClinicMgmtApp_Project.UI
             btnReports.BackColor = SIDEBAR_BG;
             btnUserManagement.BackColor = SIDEBAR_BG;
             btnDoctorManagement.BackColor = SIDEBAR_BG;
+            btnDoctorScheduling.BackColor = SIDEBAR_BG;
             btnPatientRegistration.BackColor = SIDEBAR_BG;
 
             // Highlight the active button
             activeButton.BackColor = SIDEBAR_ACTIVE;
         }
 
+        private void AdminDashboard_ResizeEnd(object sender, EventArgs e)
+        {
+            if (pnlDoctorScheduling.Visible)
+            {
+                SetupSchedulingListViews();
+            }
+        }
     }
 }

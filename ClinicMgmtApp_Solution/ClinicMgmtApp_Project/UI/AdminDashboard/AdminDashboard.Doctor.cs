@@ -45,6 +45,38 @@ namespace ClinicMgmtApp_Project.UI
             grpDoctorMgmt.Text = "Create Doctor";
         }
 
+        private void SetupSchedulingListViews()
+        {
+            List<ListBox> dayListBoxes = new List<ListBox>
+            {
+                lbSunday, lbMonday, lbTuesday, lbWednesday,
+                lbThursday, lbFriday, lbSaturday
+            };
+
+            foreach (ListBox lb in dayListBoxes)
+            {
+                lb.Items.Clear();
+                for (int i = 0; i < 24; i++)
+                {
+                    lb.Items.Add("");
+                }
+
+                lb.ItemHeight = lb.ClientSize.Height / 24;
+
+                lb.DrawItem += (s, e) =>
+                {
+                    e.DrawBackground();
+
+                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+                        e.Graphics.FillRectangle(Brushes.LightSkyBlue, e.Bounds);
+                    else
+                        e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds);
+
+                    e.Graphics.DrawRectangle(Pens.Gray, e.Bounds);
+                };
+            }
+        }
+
         private void EnterDoctorEditMode()
         {
             isEditMode = true;
