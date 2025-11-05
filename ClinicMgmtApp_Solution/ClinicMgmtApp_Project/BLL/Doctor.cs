@@ -98,7 +98,22 @@ namespace ClinicMgmtApp_Project.BLL
         {
             return specialization.ToString();
         }
-
+        public static void DeleteDoctor(int id)
+        {
+            if (!UserStore.GetUser().CanPerformAction(minimumRole: RolesEnum.Administrator))
+            {
+                throw new UnauthorizedException("Access denied: Only Admin users can delete Doctor.");
+            }
+            DoctorDB.DeleteDoctor(id);
+        }
+        public static void CreateDoctor(Doctor newDoctor)
+        {
+            if (!UserStore.GetUser().CanPerformAction(minimumRole: RolesEnum.Administrator))
+            {
+                throw new UnauthorizedException("Access denied: Only Admin users can register new Doctors.");
+            }
+            DoctorDB.CreateDoctor(newDoctor);
+        }
         public void SetAvailability(DateTime availability)
         {
             if (!UserStore.GetUser().CanPerformAction(RolesEnum.Doctor))
@@ -109,3 +124,4 @@ namespace ClinicMgmtApp_Project.BLL
         }
     }
 }
+

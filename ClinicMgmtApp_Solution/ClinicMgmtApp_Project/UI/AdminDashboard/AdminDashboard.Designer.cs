@@ -41,6 +41,7 @@ namespace ClinicMgmtApp_Project.UI
             this.pnlSidebarHeader = new System.Windows.Forms.Panel();
             this.lblSidebarTitle = new System.Windows.Forms.Label();
             this.pnlMainContent = new System.Windows.Forms.Panel();
+            this.pnlPatientRegistration = new System.Windows.Forms.Panel();
             this.pnlDoctorScheduling = new System.Windows.Forms.Panel();
             this.grpDoctorScheduling = new System.Windows.Forms.GroupBox();
             this.layoutSchedulingContent = new System.Windows.Forms.TableLayoutPanel();
@@ -112,8 +113,6 @@ namespace ClinicMgmtApp_Project.UI
             this.lblDoctorLName = new System.Windows.Forms.Label();
             this.txtDoctorFName = new System.Windows.Forms.TextBox();
             this.lblDoctorFName = new System.Windows.Forms.Label();
-            this.pnlPatientRegistration = new System.Windows.Forms.Panel();
-            this.lblPatientRegistrationPlaceholder = new System.Windows.Forms.Label();
             this.pnlReports = new System.Windows.Forms.Panel();
             this.lblReportsPlaceholder = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
@@ -136,7 +135,6 @@ namespace ClinicMgmtApp_Project.UI
             ((System.ComponentModel.ISupportInitialize)(this.dgvDoctors)).BeginInit();
             this.grpDoctorMgmt.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.pnlPatientRegistration.SuspendLayout();
             this.pnlReports.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -304,10 +302,10 @@ namespace ClinicMgmtApp_Project.UI
             // pnlMainContent
             // 
             this.pnlMainContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
+            this.pnlMainContent.Controls.Add(this.pnlPatientRegistration);
             this.pnlMainContent.Controls.Add(this.pnlDoctorScheduling);
             this.pnlMainContent.Controls.Add(this.pnlUserManagement);
             this.pnlMainContent.Controls.Add(this.pnlDoctorManagement);
-            this.pnlMainContent.Controls.Add(this.pnlPatientRegistration);
             this.pnlMainContent.Controls.Add(this.pnlReports);
             this.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMainContent.Location = new System.Drawing.Point(298, 72);
@@ -316,6 +314,16 @@ namespace ClinicMgmtApp_Project.UI
             this.pnlMainContent.Padding = new System.Windows.Forms.Padding(20);
             this.pnlMainContent.Size = new System.Drawing.Size(1384, 681);
             this.pnlMainContent.TabIndex = 3;
+            // 
+            // pnlPatientRegistration
+            // 
+            this.pnlPatientRegistration.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlPatientRegistration.Location = new System.Drawing.Point(20, 20);
+            this.pnlPatientRegistration.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlPatientRegistration.Name = "pnlPatientRegistration";
+            this.pnlPatientRegistration.Size = new System.Drawing.Size(1344, 641);
+            this.pnlPatientRegistration.TabIndex = 3;
+            this.pnlPatientRegistration.Visible = false;
             // 
             // pnlDoctorScheduling
             // 
@@ -788,6 +796,8 @@ namespace ClinicMgmtApp_Project.UI
             // 
             // comboDoctorSelect
             // 
+            this.comboDoctorSelect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboDoctorSelect.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboDoctorSelect.FormattingEnabled = true;
             this.comboDoctorSelect.Location = new System.Drawing.Point(15, 34);
@@ -804,7 +814,7 @@ namespace ClinicMgmtApp_Project.UI
             this.lblDoctorSelect.Name = "lblDoctorSelect";
             this.lblDoctorSelect.Size = new System.Drawing.Size(349, 32);
             this.lblDoctorSelect.TabIndex = 13;
-            this.lblDoctorSelect.Text = "User Associated";
+            this.lblDoctorSelect.Text = "Doctor";
             this.lblDoctorSelect.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlEffectiveDate
@@ -819,6 +829,8 @@ namespace ClinicMgmtApp_Project.UI
             // 
             // dtEffectiveDate
             // 
+            this.dtEffectiveDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dtEffectiveDate.Font = new System.Drawing.Font("Lucida Sans", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtEffectiveDate.Location = new System.Drawing.Point(16, 34);
             this.dtEffectiveDate.Name = "dtEffectiveDate";
@@ -1357,30 +1369,6 @@ namespace ClinicMgmtApp_Project.UI
             this.lblDoctorFName.Text = "First Name";
             this.lblDoctorFName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pnlPatientRegistration
-            // 
-            this.pnlPatientRegistration.Controls.Add(this.lblPatientRegistrationPlaceholder);
-            this.pnlPatientRegistration.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPatientRegistration.Location = new System.Drawing.Point(20, 20);
-            this.pnlPatientRegistration.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlPatientRegistration.Name = "pnlPatientRegistration";
-            this.pnlPatientRegistration.Size = new System.Drawing.Size(1344, 641);
-            this.pnlPatientRegistration.TabIndex = 3;
-            this.pnlPatientRegistration.Visible = false;
-            // 
-            // lblPatientRegistrationPlaceholder
-            // 
-            this.lblPatientRegistrationPlaceholder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPatientRegistrationPlaceholder.Font = new System.Drawing.Font("Lucida Sans", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPatientRegistrationPlaceholder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
-            this.lblPatientRegistrationPlaceholder.Location = new System.Drawing.Point(0, 0);
-            this.lblPatientRegistrationPlaceholder.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblPatientRegistrationPlaceholder.Name = "lblPatientRegistrationPlaceholder";
-            this.lblPatientRegistrationPlaceholder.Size = new System.Drawing.Size(1344, 641);
-            this.lblPatientRegistrationPlaceholder.TabIndex = 0;
-            this.lblPatientRegistrationPlaceholder.Text = "Patient Registration Module - Coming Soon";
-            this.lblPatientRegistrationPlaceholder.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // pnlReports
             // 
             this.pnlReports.Controls.Add(this.lblReportsPlaceholder);
@@ -1449,7 +1437,6 @@ namespace ClinicMgmtApp_Project.UI
             this.grpDoctorMgmt.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.pnlPatientRegistration.ResumeLayout(false);
             this.pnlReports.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -1470,7 +1457,6 @@ namespace ClinicMgmtApp_Project.UI
         private System.Windows.Forms.Panel pnlDoctorManagement;
         private System.Windows.Forms.Panel pnlPatientRegistration;
         private System.Windows.Forms.Label lblReportsPlaceholder;
-        private System.Windows.Forms.Label lblPatientRegistrationPlaceholder;
         private System.Windows.Forms.DataGridView dgvUsers;
         private System.Windows.Forms.GroupBox grpAdminForm;
         private System.Windows.Forms.Label label2;

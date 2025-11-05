@@ -77,7 +77,7 @@ namespace ClinicMgmtApp_Project.UI
         private void btnDoctorScheduling_Click(object sender, EventArgs e)
         {
             ShowPanel(pnlDoctorScheduling);
-            SetupSchedulingListViews();
+            RefreshSchedulingListViews();
             SetActiveButton(btnDoctorScheduling);
         }
 
@@ -118,7 +118,7 @@ namespace ClinicMgmtApp_Project.UI
         {
             if (pnlDoctorScheduling.Visible)
             {
-                SetupSchedulingListViews();
+                RefreshSchedulingListViews();
             }
         }
     }
