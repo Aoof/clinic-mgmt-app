@@ -20,7 +20,7 @@ namespace ClinicMgmtApp_Project.DAL
             {
 
                 sqlConnection = DatabaseConnection.GetConnection();
-                sqlCommand = new SqlCommand("SELECT * FROM [dbo].[Doctor]", sqlConnection);
+                sqlCommand = new SqlCommand("SELECT * FROM [dbo].[Doctor] JOIN [dbo].[User] ON [dbo].[Doctor].Id = [dbo].[User].Id", sqlConnection);
 
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 

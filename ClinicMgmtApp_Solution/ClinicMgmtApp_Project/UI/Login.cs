@@ -13,17 +13,6 @@ namespace ClinicMgmtApp_Project.UI
             InitializeComponent();
         }
 
-        private Image ResizeImage(Image img, int width, int height)
-        {
-            Bitmap resized = new Bitmap(width, height);
-            using (Graphics g = Graphics.FromImage(resized))
-            {
-                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                g.DrawImage(img, 0, 0, width, height);
-            }
-            return resized;
-        }
-
         private void LoginForm_Load(object sender, EventArgs e)
         {
             txtUsername.Text = Properties.Settings.Default.Username;
@@ -44,6 +33,9 @@ namespace ClinicMgmtApp_Project.UI
             {
                 UserStore.Login(username, password);
                 Form dashboard = null;
+
+                // Execute any post-login actions
+
                 switch (UserStore.GetUser().Role)
                 {
                     case RolesEnum.Administrator:
@@ -84,6 +76,8 @@ namespace ClinicMgmtApp_Project.UI
                     MessageBox.Show(ex.Message, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                MessageBox.Show(ex.Message, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 MessageBox.Show("Unexpected error happened! Contact adminstration for more info.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
