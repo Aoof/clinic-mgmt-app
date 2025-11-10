@@ -10,7 +10,7 @@ namespace ClinicMgmtApp_Project.BLL
         private string firstName;
         private string lastName;
         private DoctorEnum specialization;
-        private string availability;
+        private AvailabilityStruct availability;
 
         public string FirstName 
         {
@@ -30,7 +30,7 @@ namespace ClinicMgmtApp_Project.BLL
             set { specialization = value; }
         }
 
-        public string Availability
+        public AvailabilityStruct Availability
         {
             get { return availability; }
             set { availability = value; }
@@ -41,17 +41,17 @@ namespace ClinicMgmtApp_Project.BLL
             FirstName = "";
             LastName = "";
             Specialization = DoctorEnum.Undefined;
-            Availability = "";
+            Availability = new AvailabilityStruct();
 
         }
-        public Doctor(int id, string username, string firstName, string lastName, DoctorEnum specialization, string availability) : base(id, username, RolesEnum.Doctor)
+        public Doctor(int id, string username, string firstName, string lastName, DoctorEnum specialization, AvailabilityStruct availability) : base(id, username, RolesEnum.Doctor)
         {
             FirstName = firstName;
             LastName = lastName;
             Specialization = DoctorEnum.Undefined;
             Availability = availability;
         }
-        public Doctor(int id, string username, RolesEnum role, string firstName, string lastName, DoctorEnum specialization, string availability) : base(id, username, role)
+        public Doctor(int id, string username, RolesEnum role, string firstName, string lastName, DoctorEnum specialization, AvailabilityStruct availability) : base(id, username, role)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -120,7 +120,6 @@ namespace ClinicMgmtApp_Project.BLL
             {
                 throw new UnauthorizedException("Only Admin or Doctor can change Avalibility");
             }
-
         }
     }
 }

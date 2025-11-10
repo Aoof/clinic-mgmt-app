@@ -51,5 +51,13 @@ namespace ClinicMgmtApp_Project.BLL
 
             return password;
         }
+
+        public static void ValidateAvailability(AvailabilityStruct primary, AvailabilityStruct next)
+        {
+            if (next.EffectiveDate >= primary.EffectiveDate)
+            {
+                throw new ValidationException("Next availability's effective date must be before current's effective date.");
+            }
+        }
     }
 }

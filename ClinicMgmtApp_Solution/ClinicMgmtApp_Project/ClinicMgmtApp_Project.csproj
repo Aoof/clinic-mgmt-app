@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\Doctor.cs" />
+    <Compile Include="BLL\Utils\AvailabilityStruct.cs" />
     <Compile Include="BLL\Utils\BusinessLogicExceptions.cs" />
     <Compile Include="BLL\Utils\DoctorEnum.cs" />
     <Compile Include="BLL\Utils\RolesEnum.cs" />
