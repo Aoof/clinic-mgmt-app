@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ClinicMgmtApp_Project.DAL.DatabaseConnection">
+    <Position X="13" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgABAAAAAAEAAAAAAAABAAAAA=</HashCode>
+      <FileName>DAL\DatabaseConnection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClinicMgmtApp_Project.DAL.DoctorDB">
+    <Position X="16.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABBABAAAAEAAAAAAABAQAAAA=</HashCode>
+      <FileName>DAL\DoctorDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClinicMgmtApp_Project.DAL.UserDB">
+    <Position X="13" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAQAAAAAEAAACAABAAQAAEAAAAAAAAAUAAAA=</HashCode>
+      <FileName>DAL\UserDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

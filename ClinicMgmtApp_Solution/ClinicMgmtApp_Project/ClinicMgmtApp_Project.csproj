@@ -122,6 +122,8 @@
     <EmbeddedResource Include="UI\ReceptionistDashboard.resx">
       <DependentUpon>ReceptionistDashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="BLL\BLL_Diagrams.cd" />
+    <None Include="DAL\DAL_Diagrams.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
