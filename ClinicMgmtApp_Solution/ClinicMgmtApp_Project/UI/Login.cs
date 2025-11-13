@@ -35,6 +35,7 @@ namespace ClinicMgmtApp_Project.UI
                 Form dashboard = null;
 
                 // Execute any post-login actions
+                
 
                 switch (UserStore.GetUser().Role)
                 {

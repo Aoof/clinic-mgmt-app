@@ -11,6 +11,7 @@ namespace ClinicMgmtApp_Project.BLL
         private string lastName;
         private DoctorEnum specialization;
         private AvailabilityStruct availability;
+        private List<AvailabilityStruct> otherAvailabilties;
 
         public string FirstName 
         {

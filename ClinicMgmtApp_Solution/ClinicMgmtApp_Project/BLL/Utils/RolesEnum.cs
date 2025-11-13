@@ -8,8 +8,8 @@ namespace ClinicMgmtApp_Project.BLL
 {
     public enum RolesEnum
     {
-        Administrator,
-        Doctor,
-        Receptionist
+        Administrator, // Access level 1
+        Doctor, // Access level 2
+        Receptionist // Access level 3
     }
 }

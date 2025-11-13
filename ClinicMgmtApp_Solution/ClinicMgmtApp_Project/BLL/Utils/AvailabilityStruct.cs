@@ -13,7 +13,6 @@ namespace ClinicMgmtApp_Project.BLL.Utils
         private int doctorId;
         private List<List<int>> slots; // [[day, startHour, endHour], ...]
         private DateTime effectiveDate;
-        private AvailabilityStruct? next;
 
         public int Id
         {
@@ -39,26 +38,12 @@ namespace ClinicMgmtApp_Project.BLL.Utils
             set { effectiveDate = value; }
         }
 
-        public AvailabilityStruct? Next
-        {
-            get { return next; }
-            set
-            {
-                if (value.HasValue)
-                {
-                    Validator.ValidateAvailability(this, value.Value);
-                }
-                next = value;
-            }
-        }
-
         public AvailabilityStruct(int id, int doctorId, List<List<int>> slots, DateTime effectiveDate, AvailabilityStruct? next)
         {
             this.id = id;
             this.doctorId = doctorId;
             this.slots = slots;
             this.effectiveDate = effectiveDate;
-            this.next = next;
         }
 
         public AvailabilityStruct()
@@ -67,7 +52,6 @@ namespace ClinicMgmtApp_Project.BLL.Utils
             doctorId = 0;
             slots = new List<List<int>>();
             effectiveDate = DateTime.Now;
-            next = null;
         }
 
         public string ToHexString()
