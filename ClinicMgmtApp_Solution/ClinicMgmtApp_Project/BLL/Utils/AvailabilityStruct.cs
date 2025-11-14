@@ -54,28 +54,24 @@ namespace ClinicMgmtApp_Project.BLL.Utils
             effectiveDate = DateTime.Now;
         }
 
-        public string ToHexString()
+        public string ToBase64String()
         {
             using (MemoryStream ms = new MemoryStream())
             {
                 BinaryFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(ms, this);
                 byte[] bytes = ms.ToArray();
-                return BitConverter.ToString(bytes).Replace("-", "");
+                return Convert.ToBase64String(bytes);
             }
         }
 
-        public static AvailabilityStruct FromHexString(string hex)
+        public static AvailabilityStruct FromBase64String(string base64)
         {
-            if (string.IsNullOrEmpty(hex))
+            if (string.IsNullOrEmpty(base64))
             {
                 return new AvailabilityStruct();
             }
-            byte[] bytes = new byte[hex.Length / 2];
-            for (int i = 0; i < bytes.Length; i++)
-            {
-                bytes[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
-            }
+            byte[] bytes = Convert.FromBase64String(base64);
             using (MemoryStream ms = new MemoryStream(bytes))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
