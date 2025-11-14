@@ -1,6 +1,8 @@
 ﻿using ClinicMgmtApp_Project.BLL;
+using ClinicMgmtApp_Project.BLL.Utils;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ClinicMgmtApp_Project.UI
@@ -36,6 +38,10 @@ namespace ClinicMgmtApp_Project.UI
         {
             InitializeComponent();
 
+            // Adjust notification button
+            btnNotifications.Image = ResizeImage(btnNotifications.Image, 25, 25);
+            btnNotifications.ImageAlign = ContentAlignment.MiddleCenter;
+
             // Adjust button image sizes
             AdjustButtonStyles(btnDoctorManagement);
             AdjustButtonStyles(btnDoctorScheduling);
@@ -47,6 +53,8 @@ namespace ClinicMgmtApp_Project.UI
 
             ShowPanel(pnlUserManagement);
             SetActiveButton(btnUserManagement);
+
+            NotificationManager.NotificationAdded += OnNotificationAdded;
         }
 
         private void AdminDashboard_Load(object sender, EventArgs e)
@@ -119,6 +127,45 @@ namespace ClinicMgmtApp_Project.UI
             if (pnlDoctorScheduling.Visible)
             {
                 RefreshSchedulingListViews();
+            }
+        }
+
+        private void OnNotificationAdded(Notification notif)
+        {
+            // Show toast
+            timerToast.Stop();
+            lblToast.Text = notif.Message;
+            lblToast.BackColor = notif.Type == NotificationType.Error ? Color.Red : notif.Type == NotificationType.Warning ? Color.Orange : Color.Green;
+            lblToast.Visible = true;
+            timerToast.Start();
+            // Update list if visible
+            if (pnlNotifications.Visible)
+            {
+                RefreshNotificationsList();
+            }
+        }
+
+        private void timerToast_Tick(object sender, EventArgs e)
+        {
+            lblToast.Visible = false;
+            timerToast.Stop();
+        }
+
+        private void RefreshNotificationsList()
+        {
+            lbNotifications.Items.Clear();
+            foreach (var n in NotificationManager.GetActiveNotifications().OrderByDescending(n => n.Timestamp))
+            {
+                lbNotifications.Items.Add($"{n.Timestamp:HH:mm:ss} - {n.Type}: {n.Message}");
+            }
+        }
+
+        private void btnNotifications_Click(object sender, EventArgs e)
+        {
+            pnlNotifications.Visible = !pnlNotifications.Visible;
+            if (pnlNotifications.Visible)
+            {
+                RefreshNotificationsList();
             }
         }
     }

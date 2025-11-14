@@ -115,6 +115,11 @@ namespace ClinicMgmtApp_Project.BLL
                 throw new UnauthorizedException("Access denied: Only Admin users can update other users.");
             }
 
+            if (plainPassword == null)
+            {
+                UserDB.UpdateUser(updatedUser, null);
+                return;
+            }
             UserDB.UpdateUser(updatedUser, Validator.ValidatePassword(plainPassword));
         }
 

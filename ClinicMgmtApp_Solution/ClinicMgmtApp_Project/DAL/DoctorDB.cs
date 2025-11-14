@@ -33,7 +33,7 @@ namespace ClinicMgmtApp_Project.DAL
                    sqlDataReader["FirstName"].ToString(),
                    sqlDataReader["LastName"].ToString(),
                    Doctor.StringToSpecialization(sqlDataReader["Specialization"].ToString()),
-                   AvailabilityStruct.FromHexString(sqlDataReader["Availability"].ToString())
+                   AvailabilityStruct.FromBase64String(sqlDataReader["Availability"].ToString())
                );
 
                     Doctors.Add(doctors);
@@ -80,7 +80,7 @@ namespace ClinicMgmtApp_Project.DAL
                 sqlCommand.Parameters.AddWithValue("@FirstName", entity.FirstName);
                 sqlCommand.Parameters.AddWithValue("@LastName", entity.LastName);
                 sqlCommand.Parameters.AddWithValue("@Specialization", Doctor.SpecializatioToString(entity.Specialization));
-                sqlCommand.Parameters.AddWithValue("@Availability", entity.Availability.ToHexString());
+                sqlCommand.Parameters.AddWithValue("@Availability", entity.Availability.ToBase64String());
 
                 sqlCommand.ExecuteNonQuery();
             }
@@ -110,7 +110,7 @@ namespace ClinicMgmtApp_Project.DAL
                 sqlCommand.Parameters.AddWithValue("@FirstName", entity.FirstName);
                 sqlCommand.Parameters.AddWithValue("@LastName", entity.LastName);
                 sqlCommand.Parameters.AddWithValue("@Specialization", Doctor.SpecializatioToString(entity.Specialization));
-                sqlCommand.Parameters.AddWithValue("@Availability", entity.Availability.ToHexString());
+                sqlCommand.Parameters.AddWithValue("@Availability", entity.Availability.ToBase64String());
                 sqlCommand.Parameters.AddWithValue("@Id", entity.Id);
 
                 int rowsAffected = sqlCommand.ExecuteNonQuery();

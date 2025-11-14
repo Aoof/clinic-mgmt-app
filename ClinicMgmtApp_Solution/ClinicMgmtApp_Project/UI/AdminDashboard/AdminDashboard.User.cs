@@ -1,4 +1,5 @@
 ﻿using ClinicMgmtApp_Project.BLL;
+using ClinicMgmtApp_Project.BLL.Utils;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -23,7 +24,7 @@ namespace ClinicMgmtApp_Project.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error loading users: " + ex.Message, "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                NotificationManager.AddNotification("Error loading users: " + ex.Message, NotificationType.Error);
             }
             dgvUsers.ClearSelection();
             btnUsrSubmit.Text = "Create";
@@ -93,28 +94,28 @@ namespace ClinicMgmtApp_Project.UI
             try
             {
                 string username = txtUsrUsername.Text.Trim();
+                string password = isPasswordChanged ? txtUsrPassword.Text : null;
                 string str_role = comboRoles.SelectedItem?.ToString() ?? string.Empty;
                 RolesEnum role = User.StringToRole(str_role);
-                string password = isPasswordChanged ? txtUsrPassword.Text : null;
                 if (isEditMode)
                 {
                     int userId = Convert.ToInt32(dgvUsers.CurrentRow.Cells["Id"].Value);
                     User updatedUser = new User(userId, username, role);
                     User.UpdateUser(updatedUser, password);
-                    MessageBox.Show("User updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    NotificationManager.AddNotification("User updated successfully!", NotificationType.Info);
                 }
                 else
                 {
                     User newUser = new User(0, username, role);
                     User.CreateUser(newUser, password);
-                    MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    NotificationManager.AddNotification("User created successfully!", NotificationType.Info);
                 }
                 dgvUsers.DataSource = User.GetAllUsers();
                 ResetUsrForm();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message, "Operation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                NotificationManager.AddNotification("Error: " + ex.Message, NotificationType.Error);
             }
         }
 
@@ -128,14 +129,14 @@ namespace ClinicMgmtApp_Project.UI
                 if (confirmResult == DialogResult.Yes)
                 {
                     User.DeleteUser(userId);
-                    MessageBox.Show("User deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    NotificationManager.AddNotification("User deleted successfully!", NotificationType.Info);
                     dgvUsers.DataSource = User.GetAllUsers();
                     ResetUsrForm();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error deleting user: " + ex.Message, "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                NotificationManager.AddNotification("Error deleting user: " + ex.Message, NotificationType.Error);
             }
         }
 
